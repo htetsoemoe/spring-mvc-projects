@@ -1,0 +1,13 @@
+@charset "ISO-8859-1";
+
+body {
+	background: #264653;
+}
+
+.table-header-color {
+	background: #2a9d8f;
+}
+
+.card-header-color {
+	background: #e9c46a;
+}
