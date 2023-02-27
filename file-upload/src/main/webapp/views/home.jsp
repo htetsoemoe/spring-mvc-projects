@@ -38,7 +38,8 @@
 									<td>Title</td>
 									<td>Author</td>
 									<td>Category</td>
-									<td>Description</td>
+									<td>Price</td>
+									<td>Remark</td>
 								</tr>
 							</thead>
 
@@ -48,6 +49,7 @@
 									<td>Head First Java</td>
 									<td>John Doe</td>
 									<td>Computer Programming</td>
+									<td>$25.99</td>
 									<td>About Java Programming Book</td>
 								</tr>
 								<tr>
@@ -55,6 +57,7 @@
 									<td>Spring Start Here</td>
 									<td>John Doe</td>
 									<td>Computer Programming</td>
+									<td>$20.99</td>
 									<td>About Spring Framework</td>
 								</tr>
 							</tbody>
