@@ -39,12 +39,12 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/edit")
+	@GetMapping("edit")
 	String edit() {
 		return "book-edit";
 	}
 	
-	@GetMapping("/details")
+	@GetMapping("details") 
 	String details() {
 		return "book-details";
 	}
