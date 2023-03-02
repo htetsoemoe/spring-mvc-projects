@@ -22,12 +22,15 @@
 <body>
 	<div class="container">
 		<h1 class="mb-4 text-white">
-			<sp:message code="app.title"></sp:message>
+			<c:url value="/home" var="home"></c:url>
+			<a href="${ home }" class="text-decoration-none text-light">
+				<sp:message code="app.title"></sp:message>
+			</a>
 		</h1>
 
 		<div class="row">
 			<div class="col-9">
-				<div class="card">
+				<div class="card mb-4">
 					<h3 class="card-header h5 card-header-color">Book List</h3>
 
 					<div class="card-body">
@@ -44,22 +47,16 @@
 							</thead>
 
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Head First Java</td>
-									<td>John Doe</td>
-									<td>Computer Programming</td>
-									<td>$25.99</td>
-									<td>About Java Programming Book</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Spring Start Here</td>
-									<td>John Doe</td>
-									<td>Computer Programming</td>
-									<td>$20.99</td>
-									<td>About Spring Framework</td>
-								</tr>
+								<c:forEach var="book" items="${ list }">
+									<tr>
+										<td>${ book.id }</td>
+										<td>${ book.title }</td>
+										<td>${ book.author }</td>
+										<td>${ book.category.name }</td>
+										<td>${ book.price }</td>
+										<td>${ book.remark }</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

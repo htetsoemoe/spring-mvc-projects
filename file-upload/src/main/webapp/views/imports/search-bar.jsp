@@ -7,22 +7,36 @@
 		<div class="card">
 			<h3 class="card-header h5 card-header-color">Book Search</h3>
 
-			<form action="#" class="card-body">
+			<!-- when user click 'Search' button which made  GET Request to following link -->
+			
+			<c:url value="/book" var="searchUrl"></c:url>
+			<form action="${ searchUrl }" class="card-body">
 				<div class="mb-4">
 					<label for="category" class="col-form-label">Category</label>
+					
 					<select name="category" id="category" class="form-select">
-						<option value="">Book Search</option>
+						<option value="">Select Category</option>
+						
+						<c:forEach var="c" items="${ categories }">
+							<option value="${ c.id }">${ c.name }</option>
+						</c:forEach>
+						
 					</select>
 				</div>
 
 				<div class="mb-4">
 					<label for="keyword" class="col-form-label">Keyword</label>
-					<input type="text" class="form-control" id="keyword" placeholder="Enter Keyword" />
+					<input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter Keyword" />
 				</div>
 
 
 				<div class="d-grid gap-2">
+				
+					<!-- This is button look like 'Submit' which made GET Request to '/book' with search keyword -->
 					<button class="btn btn-primary">Search</button>
+					
+					
+					
 					<a href="#" class="btn btn-danger">Upload</a> 
 					
 					<c:url value="/book/edit" var="bookEdit"></c:url>

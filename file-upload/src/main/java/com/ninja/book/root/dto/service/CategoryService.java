@@ -15,7 +15,7 @@ public class CategoryService {
 	private NamedParameterJdbcTemplate template;
 
 	public List<Category> findAll() {
-		return template.query("select * from category", new BeanPropertyRowMapper<>(Category.class));
+		return template.query("select * from category order by name", new BeanPropertyRowMapper<>(Category.class));
 	}
 
 }
