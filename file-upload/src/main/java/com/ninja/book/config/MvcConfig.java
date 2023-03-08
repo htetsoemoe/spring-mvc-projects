@@ -1,9 +1,11 @@
 package com.ninja.book.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,10 +14,15 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.ninja.book.mvc.formatter.CategoryFormatter;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.ninja.book.mvc")
 public class MvcConfig implements WebMvcConfigurer{
+	
+	@Autowired
+	private CategoryFormatter formatter;
 	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -38,6 +45,11 @@ public class MvcConfig implements WebMvcConfigurer{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+	
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addFormatter(formatter);
 	}
 	
 	@Override
