@@ -50,7 +50,12 @@
 								<c:forEach var="book" items="${ list }">
 									<tr>
 										<td>${ book.id }</td>
-										<td>${ book.title }</td>
+										<td>
+											<c:url value="/book/details" var="detailsLink">
+												<c:param name="id" value="${ book.id }"></c:param>
+											</c:url>
+											<a href="${ detailsLink }">${ book.title }</a>
+										</td>
 										<td>${ book.author }</td>
 										<td>${ book.category.name }</td>
 										<td>${ book.price }</td>

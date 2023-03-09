@@ -32,7 +32,9 @@
 		<div class="row">
 			<div class="col-9">
 				<div class="card mb-4">
-					<h3 class="card-header h5 card-header-color">Edit Book</h3>
+					<h3 class="card-header h5 card-header-color">
+						 ${ book.id eq 0 ? 'Add New ' : 'Edit ' }Book
+					</h3>
 
 					<div class="card-body row">
 						<div class="col">
@@ -79,6 +81,9 @@
 								<div class="row mb-4">
 									<div class="col">
 										<button class="btn btn-primary">Save Book</button>
+										
+										<c:url value="/home" var="homeLink"></c:url>
+										<a href="${ homeLink }" class="btn btn-secondary">Home</a>
 									</div>
 								</div>
 							

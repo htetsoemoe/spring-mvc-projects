@@ -72,6 +72,9 @@
 										<c:param name="id" value="${ book.id }"></c:param>
 									</c:url>
 									<a href="${ editUrl }" class="btn btn-primary">Edit Book</a>
+																			
+									<c:url value="/home" var="homeLink"></c:url>
+									<a href="${ homeLink }" class="btn btn-secondary">Home</a>
 								</div>
 							</div>
 

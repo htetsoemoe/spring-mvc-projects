@@ -18,7 +18,14 @@
 						<option value="">Select Category</option>
 						
 						<c:forEach var="c" items="${ categories }">
-							<option value="${ c.id }">${ c.name }</option>
+							<c:choose>
+								<c:when test="${ c.id eq param.category }">
+									<option value="${ c.id }" selected="selected">${ c.name }</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${ c.id }">${ c.name }</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 						
 					</select>
@@ -26,7 +33,7 @@
 
 				<div class="mb-4">
 					<label for="keyword" class="col-form-label">Keyword</label>
-					<input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter Keyword" />
+					<input type="text" name="keyword" value="${ param.keyword }" class="form-control" id="keyword" placeholder="Enter Keyword" />
 				</div>
 
 
