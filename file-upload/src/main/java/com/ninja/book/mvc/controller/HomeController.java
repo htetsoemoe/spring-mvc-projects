@@ -59,6 +59,7 @@ public class HomeController {
 		}
 		
 		int id = service.save(book);
+		System.out.println(id);
 		redirect.addAttribute("id", id); // add id to redirect
 		
 		return "redirect:/book/details";

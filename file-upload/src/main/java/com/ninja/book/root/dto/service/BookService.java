@@ -84,7 +84,7 @@ public class BookService {
 	public int save(Book book) {
 		// if book id is zero, save book
 		if (book.getId() == 0) {
-			bookInsert.executeAndReturnKeyHolder(book.getInsertParams())
+			return bookInsert.executeAndReturnKeyHolder(book.getInsertParams())
 						.getKey().intValue();						
 		}
 		

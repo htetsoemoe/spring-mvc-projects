@@ -38,7 +38,7 @@
 						<div class="col">
 							<form:form action="/book" modelAttribute="book" cssClass="form-control">
 							
-								<form:hidden path="id"/>
+								<form:hidden path="id"/> 
 								
 								<div class="row mb-4">
 									<div class="col">
@@ -47,16 +47,19 @@
 											<option value="">Select Category</option>
 											<form:options items="${ categories }" itemValue="id" itemLabel="name"/>
 										</form:select>
+										<form:errors path="category" cssClass="text-danger"></form:errors>
 									</div>
 									
 									<div class="col">
 										<label class="form-label">Book Title</label>
 										<form:input path="title" cssClass="form-control" placeholder="Enter Book Title"/>
+										<form:errors path="title" cssClass="text-danger"></form:errors>
 									</div>
 									
 									<div class="col">
 										<label class="form-label">Author</label>
 										<form:input path="author" cssClass="form-control" placeholder="Enter Author Name"/>
+										<form:errors path="author" cssClass="text-danger"></form:errors>
 									</div>
 								</div>
 								
@@ -64,6 +67,7 @@
 									<div class="col-4">
 										<label class="form-label">Price</label>
 										<form:input path="price" type="number" cssClass="form-control"/>
+										<form:errors path="price" cssClass="text-danger"></form:errors>
 									</div>
 									
 									<div class="col">
