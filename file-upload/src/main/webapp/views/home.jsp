@@ -11,7 +11,7 @@
 <title><sp:message code="app.title"></sp:message></title>
 
 <c:url value="/resources/css/bootstrap.min.css" var="bootStrapCss"></c:url>
-<c:url value="/resources/js/bootstrap.bundle.min.css" var="bootStrapJs"></c:url>
+<c:url value="/resources/js/bootstrap.bundle.min.js" var="bootStrapJs"></c:url>
 
 <c:url value="/resources/css/custom.css" var="customCss"></c:url>
 
@@ -23,10 +23,14 @@
 	<div class="container">
 		<h1 class="mb-4 text-white">
 			<c:url value="/home" var="home"></c:url>
-			<a href="${ home }" class="text-decoration-none text-light">
-				<sp:message code="app.title"></sp:message>
+			<a href="${ home }" class="text-decoration-none text-light"> <sp:message
+					code="app.title"></sp:message>
 			</a>
 		</h1>
+
+		<c:url value="/views/imports/upload-result.jsp"
+			var="uploadResultImport"></c:url>
+		<c:import url="${ uploadResultImport }"></c:import>
 
 		<div class="row">
 			<div class="col-9">
@@ -50,12 +54,9 @@
 								<c:forEach var="book" items="${ list }">
 									<tr>
 										<td>${ book.id }</td>
-										<td>
-											<c:url value="/book/details" var="detailsLink">
+										<td><c:url value="/book/details" var="detailsLink">
 												<c:param name="id" value="${ book.id }"></c:param>
-											</c:url>
-											<a href="${ detailsLink }">${ book.title }</a>
-										</td>
+											</c:url> <a href="${ detailsLink }">${ book.title }</a></td>
 										<td>${ book.author }</td>
 										<td>${ book.category.name }</td>
 										<td>${ book.price }</td>
@@ -73,6 +74,7 @@
 				<c:import url="${ searchBarImport }"></c:import>
 			</div>
 		</div>
+
 	</div>
 
 	<script src="${ bootStrapJs }"></script>
