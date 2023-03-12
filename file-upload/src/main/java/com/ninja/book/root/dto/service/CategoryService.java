@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,6 +31,11 @@ public class CategoryService {
 	
 	public Optional<Category> findById(int id) {
 		return template.queryForStream("select * from category where id = :id", Map.of("id", id), rowMapper).findFirst();
+	}
+
+	public Category getCategory(String category) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
