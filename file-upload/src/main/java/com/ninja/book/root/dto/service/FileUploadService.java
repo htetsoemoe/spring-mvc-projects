@@ -2,15 +2,17 @@ package com.ninja.book.root.dto.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ninja.book.root.dto.Book;
+import com.ninja.book.root.dto.Category;
 
 @Service
 public class FileUploadService {
@@ -20,24 +22,32 @@ public class FileUploadService {
 	@Autowired
 	private BookService bookService;
 	
-	public String upload(InputStream inputStream) {
-		var list = readLines(inputStream);
+	public String upload(MultipartFile file) {
+		var uploadBooks = readLines(file);
 		
-		for(var book : list) {
-			bookService.save(book);
+		var categoryBooksMap = uploadBooks.stream()
+				.collect(Collectors.groupingBy(a -> a.getCategory().getName()));
+		
+		for(var entry : categoryBooksMap.entrySet()) {
+			var category = categoryService.getCategory(entry.getKey());
+			
+			for(var book : entry.getValue()) {
+				book.setCategory(category);
+				bookService.save(book);
+			}
 		}
 		
-		return "Upload OK!";
+		return "%d books have been uploaded!".formatted(uploadBooks.size());
 	}
 	
-	public List<Book> readLines(InputStream inputStream) {
+	public List<Book> readLines(MultipartFile file) {
 		List<Book> list = new ArrayList<Book>();
 		
-		try(var reader = new BufferedReader(new InputStreamReader(inputStream))) {
+		try(var reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
 			
 			String line = null;
 			
-			while(line != (line = reader.readLine())) {
+			while(null != (line = reader.readLine())) {
 				var book = readBook(line);
 				list.add(book);
 			}
@@ -61,9 +71,12 @@ public class FileUploadService {
 		var book = new Book();
 		book.setTitle(array[0].trim());
 		book.setAuthor(array[1].trim());
-		book.setCategory(categoryService.getCategory(array[2].trim()));
+		book.setCategory(new Category(array[2].trim()));
 		book.setPrice(Integer.parseInt(array[3].trim()));
-		book.setRemark(array[4].trim());
+		
+		if (array.length > 4) {
+			book.setRemark(array[4].trim());
+		}
 		
 		return book;
 	}

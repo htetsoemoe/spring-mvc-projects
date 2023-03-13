@@ -24,7 +24,7 @@ public class BookUploadController {
 				  RedirectAttributes redirectAttribute) throws IOException {
 		
 		if (null != partFile && !partFile.isEmpty()) {
-			var message = service.upload(partFile.getInputStream());
+			var message = service.upload(partFile);
 			redirectAttribute.addFlashAttribute("uploadMessage", message);
 			return "redirect:/home";
 		}
