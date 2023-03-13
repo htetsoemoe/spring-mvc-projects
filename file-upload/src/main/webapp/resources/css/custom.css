@@ -11,3 +11,8 @@ body {
 .card-header-color {
 	background: #e9c46a;
 }
+
+.modal-message {
+	font-size: 18px;
+	font-weight: bold;
+}

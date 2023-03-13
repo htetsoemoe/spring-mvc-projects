@@ -6,13 +6,13 @@
 	<div class="modal" id="uploadMessageModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header card-header-color">
 					<h5 class="modal-title">File Upload Result</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p>${ uploadMessage }</p>
+					<p class="modal-message">${ uploadMessage }</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"

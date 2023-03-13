@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ninja.book.root.dto.Book;
@@ -21,7 +24,10 @@ public class FileUploadService {
 	private CategoryService categoryService;
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	private Validator validator;
 	
+	@Transactional
 	public String upload(MultipartFile file) {
 		var uploadBooks = readLines(file);
 		
@@ -33,6 +39,17 @@ public class FileUploadService {
 			
 			for(var book : entry.getValue()) {
 				book.setCategory(category);
+				
+				// validation for book fields
+				var result = new BeanPropertyBindingResult(book, "target");
+				validator.validate(book, result);
+				
+				if (result.hasErrors()) { // there is error in book validation, throw FileUploadAppException
+					var message = result.getAllErrors().stream()
+							.map(a -> a.getDefaultMessage()).findAny().get();
+					throw new FileUploadAppException(message);
+				}
+				
 				bookService.save(book);
 			}
 		}
